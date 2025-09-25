@@ -102,11 +102,10 @@ WHERE nro_contrato IS NULL ;
 -- 13) Listar todos los cargos y para aquellos que hayan sido realizados (como
 -- antecedente) por alguna persona indicar nombre y apellido de la persona y empresa donde
 -- lo ocupó.
-SELECT * FROM `agencia_personal`.`empresas` E
-INNER JOIN `agencia_personal`.`solicitudes_empresas` SE ON E.cuit= SE.cuit
-INNER JOIN `agencia_personal`.`cargos` C ON C.cod_cargo= SE.cod_cargo
+SELECT * FROM `agencia_personal`.`cargos` C
 LEFT JOIN `agencia_personal`.`antecedentes` A ON E.cuit= A.cuit and C.cod_cargo=A.cod_cargo
-LEFT JOIN `agencia_personal`.`personas` P ON P.dni= A.dni;
+LEFT JOIN `agencia_personal`.`personas` P ON P.dni= A.dni
+LEFT JOIN `agencia_personal`.`empresa` E ON A.cuit=E.cuit;
 
 -- BD: aftse
 -- 14) Indicar todos los instructores que tengan un supervisor.
