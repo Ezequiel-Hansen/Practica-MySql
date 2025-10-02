@@ -38,3 +38,8 @@ SELECT
 	GROUP BY ENT.nombre_entrevistador, EVA.cod_evaluacion
     HAVING AVG(EVA.resultado) > 71
     ORDER BY AVG(EVA.resultado)ASC, STD(EVA.resultado) DESC;
+    
+select C.nro_contrato "Contrato", COUNT(*) "Total", COUNT(IFNULL(COM.fecha_pago, NULL)) "Pagadas", COUNT(*) - COUNT(IFNULL(COM.fecha_pago, NULL)) "A pagar" 
+    FROM `contratos` C 
+    INNER JOIN `comisiones` COM ON COM.nro_contrato=C.nro_contrato
+	GROUP BY C.nro_contrato;
